@@ -1,0 +1,90 @@
+---
+title: "Security Condition and Overall Quality of buildings registered in the ABS program"
+author: "Yujia Zheng"
+date: 2020-09-20
+output: html_document
+categories: ["R"]
+tags: ["R Markdown", "Rental Apartments", "Apartment Building Evaluation", "Security Condition"]
+---
+
+
+
+<div id="author-yujia-zheng" class="section level1">
+<h1>Author: Yujia Zheng</h1>
+</div>
+<div id="abstract" class="section level1">
+<h1>Abstract</h1>
+<p>Nowadays most people care about the overall quality of a building and especially the security condition when looking for rental apartments. In this paper we explore the Apartment Building Evaluation dataset, which is from the Toronto Open Data Portal. We find that majority of the buildings are evaluated from various aspects and the security conditions are mostly good. Our findings have important implications for improving apartment environment and making choices when looking for rental buildings.</p>
+</div>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>More and more people rent apartments these days for study, work, or other purposes, and the quality of the buildings has strong influence on the quality of their life. Thus we will study the Apartment Building Evaluation dataset, in order to get more information about the living environment of rental apartments, e.g. from the aspect of security, which is super important for tenants. And the study will also give some advice for people who are looking for rental apartments, and can help with enforcing standards and improving the living environment for Toronto residents.</p>
+<p>In this paper, we mainly focus on two interested variables: SECURITY, which represents the score of security condition of evaluated buildings; and NO_OF_AREAS_EVALUATED, which reflects how thorough and complete the evaluation is. We find that most of the evaluated buildings have a pretty good security condition, and majority of them are evaluated thoroughly from lots of different areas.</p>
+<p>In this paper, firstly we have a Data section which includes a description and preview of the dataset, a description and summary statistic of the interested variables, and their graphs with some explanation. Then we have a Discussion section regarding to the main findings of the graphs, features of the interested variables and dataset, and the implications in the context of study. Moreover, there is a section of Weaknesses and Next Steps. And finally there are the References of the dataset and all R packages used in this paper.</p>
+</div>
+<div id="data-discussion" class="section level1">
+<h1>Data &amp; Discussion</h1>
+<p>The apartment_data dataset consists of evaluation scores of buildings that are registered in the Apartment Building Standards (ABS) program. Evaluation were conducted in internal and external areas, including elevators, laundary rooms, security, parking area, etc. All areas are evaluated using scores from 1 to 5 in which 1 represents the worst condition and 5 is the best. A total score is calculated and used to suggest whether the building requires a full audit, or a evaluation in the future.</p>
+<pre><code>## # A tibble: 6 x 33
+##   `_id` BALCONY_GUARDS CONFIRMED_STORE… CONFIRMED_UNITS ELEVATORS
+##   &lt;int&gt; &lt;chr&gt;                     &lt;dbl&gt;           &lt;dbl&gt; &lt;chr&gt;    
+## 1 10517 2                             4              39 1        
+## 2 10518 3                             8             124 4        
+## 3 10519 3                             4              27 3        
+## 4 10520 N/A                           3              12 N/A      
+## 5 10521 3                             3              30 3        
+## 6 10522 N/A                           3              11 N/A      
+## # … with 28 more variables: ENTRANCE_DOORS_WINDOWS &lt;chr&gt;, ENTRANCE_LOBBY &lt;chr&gt;,
+## #   EVALUATION_COMPLETED_ON &lt;chr&gt;, EXTERIOR_CLADDING &lt;chr&gt;,
+## #   EXTERIOR_GROUNDS &lt;chr&gt;, EXTERIOR_WALKWAYS &lt;chr&gt;,
+## #   GARBAGE_BIN_STORAGE_AREA &lt;chr&gt;, GARBAGE_CHUTE_ROOMS &lt;chr&gt;, GRAFFITI &lt;chr&gt;,
+## #   INTERIOR_LIGHTING_LEVELS &lt;chr&gt;, INTERIOR_WALL_CEILING_FLOOR &lt;chr&gt;,
+## #   INTERNAL_GUARDS_HANDRAILS &lt;chr&gt;, LAUNDRY_ROOMS &lt;chr&gt;,
+## #   NO_OF_AREAS_EVALUATED &lt;chr&gt;, OTHER_FACILITIES &lt;chr&gt;, PARKING_AREA &lt;chr&gt;,
+## #   PROPERTY_TYPE &lt;chr&gt;, RESULTS_OF_SCORE &lt;chr&gt;, RSN &lt;dbl&gt;, SCORE &lt;chr&gt;,
+## #   SECURITY &lt;chr&gt;, SITE_ADDRESS &lt;chr&gt;, STAIRWELLS &lt;chr&gt;,
+## #   STORAGE_AREAS_LOCKERS &lt;chr&gt;, WARD &lt;chr&gt;, WATER_PEN_EXT_BLDG_ELEMENTS &lt;chr&gt;,
+## #   YEAR_BUILT &lt;chr&gt;, YEAR_REGISTERED &lt;chr&gt;</code></pre>
+<p>Here is a preview of the apartment_data. In this dataset, there are in total 33 variables regarding to information and evaluation for buildings. For example, there are variables about evaluation scores, such as ELEVATORS, SECURITY; there are variables representing numbers, e.g. CONFIRMED_STOREYS, NO_OF_AREAS_EVALUATED; there are also variables of location and time, e.g. SITE_ADDRESS, YEAR_BUILT.</p>
+<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Above is a visualization of the variables in apartment_data, showing their classes and whether there are missing values. The variables we focus on are SECURITY and NO_OF_AREAS_EVALUATED. They are all character variables.</p>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.000   4.000   4.000   4.293   5.000   5.000</code></pre>
+<pre><code>## [1] 0.771144</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     0.0    16.0    18.0    17.2    19.0    20.0</code></pre>
+<pre><code>## [1] 2.209606</code></pre>
+<p>Here are summary statistics for the interested variables. SECURITY represents the condition of security in a building, ranging from 1 to 5. There are 24 missing values in SECURITY. After removing them, we get the summary statistics for SECURITY: it has a minimum score of 1, and a maximum of 5. SECURITY has a median of 4 and a mean of 4.293. The standard deviation of SECURITY is 0.771144, which measures the amount of variation for it.</p>
+<p>NO_OF_AREAS_EVALUATED represents the number of areas evaluated for a building in a one-time evaluation. NO_OF_AREAS_EVALUATED has a min of 0 and a max of 20. The median is 18, and on average 17.2 areas are evaluated for registered buildings. The standard deviation of NO_OF_AREAS_EVALUATED is 2.209606.</p>
+</div>
+<div id="graphs-discussion" class="section level1">
+<h1>Graphs &amp; Discussion</h1>
+<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-8-1.png" width="672" /><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
+<p>The barplots of the distribution of scores of security and number of evaluated areas show important features of our interested variables SECURITY and NO_OF_AREAS_EVALUATED.</p>
+<p>Firstly, we find that the distribution for security score is heavily left skewed, which is quite consistent with the summary statistics in Data section. The variable SECURITY has a median of 4, a 25th percentile of 4 and a 75th percentile of 5, this together with the graph suggests most of the datapoints take a value of 4 or 5. In our context of study, this tells us that most of the evaluated buildings have a pretty good security condition.</p>
+<p>The plot of the number of evaluated areas is also left skewed, with majority of the datapoints located between 15 to 19. In our context of study, this suggests majority of the buildings are evaluated thoroughly from lots of different areas. The findings are consistent with the summary statistics of SECURITY and NO_OF_AREAS_EVALUATED in the Data &amp; Discussion section.</p>
+</div>
+<div id="weaknesses-and-next-steps" class="section level1">
+<h1>Weaknesses and Next Steps</h1>
+<p>Regarding to the weaknesses, our analysis and the conclusion might not be accurate because of the missing values in the dataset. Firstly, during the collection and creation of this apartment_data dataset, missing values are filled in as “NA” or “N/A”. This actually creates some trouble for finding missing values, since R can only detect “NA”, and therefore we have to find “N/A” manually.</p>
+<p>There are a number of NAs or N/As (missing values) in our interested variable SECURITY. If the data of these NAs can be collected in the future, and if they take some extreme value such as 1 (the worst condition), this would strongly impact the result of our previous analysis. In that case we might not conclude that most of the evaluated buildings have a pretty good security condition.</p>
+<p>And this issue of missing values actually exists in many variables in this dataset, such as BALCONY_GUARDS, which has more than a thousand of NAs or N/As. This causes huge impact while analysing variables.</p>
+<p>In the future, the next steps that we could take are:</p>
+<ul>
+<li><p>Firstly the dataset needs to be more complete and thorough. The evaluation can be done again to gather these missing values.</p></li>
+<li><p>After the data are recollected, a new analysis should be done using the more complete data, and thus we can get a more accurate result about the buildings. The result of the analysis will have more reference value for people who are looking for rental apartments, and can help with the enforcement of standards and improvements of living environment for Toronto residents.</p></li>
+</ul>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<ul>
+<li>R Core Team (2020). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</li>
+<li>Yihui Xie, Alison Presmanes Hill, and Amber Thomas (2017). blogdown: Creating Websites with R Markdown. Chapman and Hall/CRC. ISBN 978-0815363729</li>
+<li>Hadley Wickham and Dana Seidel (2020). scales: Scale Functions for Visualization. R package version 1.1.1. <a href="https://CRAN.R-project.org/package=scales" class="uri">https://CRAN.R-project.org/package=scales</a></li>
+<li>Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source Software, 4(43), 1686, <a href="https://doi.org/10.21105/joss.01686" class="uri">https://doi.org/10.21105/joss.01686</a></li>
+<li>Hadley Wickham, Jim Hester and Winston Chang (2020). devtools: Tools to Make Developing R Packages Easier. R package version 2.3.1. <a href="https://CRAN.R-project.org/package=devtools" class="uri">https://CRAN.R-project.org/package=devtools</a></li>
+<li>Tierney N (2017). “visdat: Visualising Whole Data Frames.” JOSS, 2(16), 355. doi: 10.21105/joss.00355 (URL: <a href="https://doi.org/10.21105/joss.00355" class="uri">https://doi.org/10.21105/joss.00355</a>), &lt;URL: <a href="http://dx.doi.org/10.21105/joss.00355" class="uri">http://dx.doi.org/10.21105/joss.00355</a>&gt;.</li>
+<li>Elin Waring, Michael Quinn, Amelia McNamara, Eduardo Arino de la Rubia, Hao Zhu and Shannon Ellis (2020). skimr: Compact and Flexible Summaries of Data. R package version 2.1.2. <a href="https://CRAN.R-project.org/package=skimr" class="uri">https://CRAN.R-project.org/package=skimr</a></li>
+<li>Apartment Building Evaluation. (n.d.). Retrieved September 20, 2020, from <a href="https://open.toronto.ca/dataset/apartment-building-evaluation/" class="uri">https://open.toronto.ca/dataset/apartment-building-evaluation/</a></li>
+</ul>
+</div>
