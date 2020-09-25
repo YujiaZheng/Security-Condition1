@@ -1,5 +1,5 @@
 ---
-title: "Security Condition and Overall Quality of buildings registered in the ABS program"
+title: "Security Condition and Overall Quality of Buildings Registered in the ABS Program"
 author: "Yujia Zheng"
 date: 2020-09-20
 output: html_document
@@ -23,7 +23,7 @@ library(skimr)
 ```
 
 # Author: Yujia Zheng
-Link to Github repo that contains all the code in this post: 
+Supporting code and data available at (a link to Github repo that contains all useful code in this post):
 https://github.com/YujiaZheng/Security-Condition1.git
 
 # Abstract
@@ -137,7 +137,7 @@ In the future, the next steps that we could take are:
 #citation("visdat")
 citation("skimr")
 ```
-- Link to Github repo that contains all the code in this post: 
+- Supporting code and data available at (a link to Github repo that contains all useful code in this post):
 https://github.com/YujiaZheng/Security-Condition1.git
 - R Core Team (2020). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
 - Yihui Xie, Alison Presmanes Hill, and Amber Thomas (2017). blogdown: Creating Websites with R Markdown. Chapman and Hall/CRC. ISBN 978-0815363729
