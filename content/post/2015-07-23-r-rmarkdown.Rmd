@@ -23,6 +23,9 @@ library(skimr)
 ```
 
 # Author: Yujia Zheng
+Link to Github repo that contains all the code in this post: 
+https://github.com/YujiaZheng/Security-Condition1.git
+
 # Abstract
 Nowadays most people care about the overall quality of a building and especially the security condition when looking for rental apartments. In this paper we explore the Apartment Building Evaluation dataset, which is from the Toronto Open Data Portal. We find that majority of the buildings are evaluated from various aspects and the security conditions are mostly good. Our findings have important implications for improving apartment environment and making choices when looking for rental buildings.
 
@@ -134,6 +137,8 @@ In the future, the next steps that we could take are:
 #citation("visdat")
 citation("skimr")
 ```
+- Link to Github repo that contains all the code in this post: 
+https://github.com/YujiaZheng/Security-Condition1.git
 - R Core Team (2020). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
 - Yihui Xie, Alison Presmanes Hill, and Amber Thomas (2017). blogdown: Creating Websites with R Markdown. Chapman and Hall/CRC. ISBN 978-0815363729
 - Hadley Wickham and Dana Seidel (2020). scales: Scale Functions for Visualization. R package version 1.1.1. https://CRAN.R-project.org/package=scales
